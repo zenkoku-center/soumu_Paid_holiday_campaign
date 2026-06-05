@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>有給取得促進キャンペーン アンケート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #f5f4f0;
+    color: #1a1a1a;
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .container {
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding: 2rem 1.5rem;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e0ddd6;
+  }
+
+  .company {
+    font-size: 12px;
+    color: #888;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.7;
+  }
+
+  .subtitle span {
+    color: #c0392b;
+    font-weight: 500;
+  }
+
+  .progress-wrap {
+    margin-bottom: 1.5rem;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 6px;
+  }
+
+  .progress-bar {
+    height: 4px;
+    background: #e0ddd6;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: #2c6e49;
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid #e0ddd6;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.2s;
+  }
+
+  .card:focus-within {
+    border-color: #2c6e49;
+  }
+
+  .question {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .required {
+    color: #c0392b;
+    margin-right: 4px;
+  }
+
+  .q-num {
+    display: inline-block;
+    background: #2c6e49;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 22px;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 1px solid #e0ddd6;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .option:hover {
+    border-color: #2c6e49;
+    background: #f0f7f3;
+  }
+
+  .option input[type="radio"] {
+    accent-color: #2c6e49;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  .option input[type="radio"]:checked + span {
+    color: #1a1a1a;
+    font-weight: 500;
+  }
+
+  .option:has(input:checked) {
+    border-color: #2c6e49;
+    background: #f0f7f3;
+  }
+
+  textarea {
+    width: 100%;
+    border: 1px solid #e0ddd6;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 14px;
+    color: #1a1a1a;
+    resize: vertical;
+    min-height: 100px;
+    background: #fafaf8;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  textarea:focus {
+    border-color: #2c6e49;
+    background: #fff;
+  }
+
+  textarea::placeholder {
+    color: #aaa;
+  }
+
+  .submit-area {
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+
+  .btn-submit {
+    display: inline-block;
+    background: #2c6e49;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 48px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: background 0.2s, transform 0.1s;
+    width: 100%;
+  }
+
+  .btn-submit:hover {
+    background: #1e4d33;
+  }
+
+  .btn-submit:active {
+    transform: scale(0.98);
+  }
+
+  .note {
+    text-align: center;
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 12px;
+    line-height: 1.7;
+  }
+
+  .error-msg {
+    display: none;
+    color: #c0392b;
+    font-size: 12px;
+    margin-top: 6px;
+  }
+
+  .card.has-error {
+    border-color: #c0392b;
+  }
+
+  .card.has-error .error-msg {
+    display: block;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <p class="company">株式会社全国労務管理支援センター　総務部</p>
+    <h1 class="title">有給取得促進キャンペーン<br>アンケート</h1>
+    <p class="subtitle">
+      ご回答いただいた方には抽選で<span>Amazonギフト券（3,000円分）</span>をプレゼントします。<br>
+      所要時間：約3分
+    </p>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>回答の進捗</span>
+      <span id="progress-text">0 / 5 問</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div class="card" id="card1">
+    <p class="question">
+      <span class="required">*</span><span class="q-num">1</span>
+      昨年度、有給休暇を何日取得しましたか？
+    </p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q1" value="0-5"><span>0?5日</span></label>
+      <label class="option"><input type="radio" name="q1" value="6-10"><span>6?10日</span></label>
+      <label class="option"><input type="radio" name="q1" value="11-15"><span>11?15日</span></label>
+      <label class="option"><input type="radio" name="q1" value="16+"><span>16日以上</span></label>
+    </div>
+    <p class="error-msg">回答を選択してください</p>
+  </div>
+
+  <div class="card" id="card2">
+    <p class="question">
+      <span class="required">*</span><span class="q-num">2</span>
+      有給休暇を取得しづらいと感じることがありますか？
+    </p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q2" value="often"><span>よくある</span></label>
+      <label class="option"><input type="radio" name="q2" value="sometimes"><span>たまにある</span></label>
+      <label class="option"><input type="radio" name="q2" value="rarely"><span>あまりない</span></label>
+      <label class="option"><input type="radio" name="q2" value="never"><span>まったくない</span></label>
+    </div>
+    <p class="error-msg">回答を選択してください</p>
+  </div>
+
+  <div class="card" id="card3">
+    <p class="question">
+      <span class="required">*</span><span class="q-num">3</span>
+      有給を取得しづらい理由として最も近いものを選んでください。
+    </p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q3" value="workload"><span>業務量が多く代替者がいない</span></label>
+      <label class="option"><input type="radio" name="q3" value="atmosphere"><span>上司や同僚に気を使う</span></label>
+      <label class="option"><input type="radio" name="q3" value="system"><span>申請しづらい雰囲気がある</span></label>
+      <label class="option"><input type="radio" name="q3" value="none"><span>特に理由はない</span></label>
+    </div>
+    <p class="error-msg">回答を選択してください</p>
+  </div>
+
+  <div class="card" id="card4">
+    <p class="question">
+      <span class="required">*</span><span class="q-num">4</span>
+      有給取得促進のためにあった方がよいと思う取り組みを選んでください。
+    </p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q4" value="plan"><span>計画的付与制度の導入</span></label>
+      <label class="option"><input type="radio" name="q4" value="boss"><span>上司からの積極的な取得推奨</span></label>
+      <label class="option"><input type="radio" name="q4" value="share"><span>取得状況の定期的な確認・共有</span></label>
+      <label class="option"><input type="radio" name="q4" value="handover"><span>業務の標準化・引き継ぎ体制の整備</span></label>
+    </div>
+    <p class="error-msg">回答を選択してください</p>
+  </div>
+
+  <div class="card" id="card5">
+    <p class="question">
+      <span class="required">*</span><span class="q-num">5</span>
+      今後の有給取得についての目標を教えてください。
+    </p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q5" value="increase"><span>今年は昨年より多く取得したい</span></label>
+      <label class="option"><input type="radio" name="q5" value="maintain"><span>昨年と同程度取得できればよい</span></label>
+      <label class="option"><input type="radio" name="q5" value="difficult"><span>取得を増やしたいが難しい</span></label>
+      <label class="option"><input type="radio" name="q5" value="noplan"><span>特に考えていない</span></label>
+    </div>
+    <p class="error-msg">回答を選択してください</p>
+  </div>
+
+  <div class="card">
+    <p class="question">
+      <span class="q-num" style="background:#aaa;">任</span>
+      ご意見・ご要望があればご記入ください。（任意）
+    </p>
+    <textarea name="q6" placeholder="自由にご記入ください"></textarea>
+  </div>
+
+  <div class="submit-area">
+    <button class="btn-submit" onclick="submitForm()">送信する</button>
+    <p class="note">※回答は匿名で集計されます</p>
+  </div>
+
+</div>
+
+<script>
+  var REDIRECT_URL = "ここに種明かしページのURLを入力してください";
+
+  var required = ["q1","q2","q3","q4","q5"];
+
+  document.querySelectorAll('input[type="radio"]').forEach(function(r){
+    r.addEventListener('change', updateProgress);
+  });
+
+  function updateProgress(){
+    var answered = 0;
+    required.forEach(function(name){
+      if(document.querySelector('input[name="'+name+'"]:checked')) answered++;
+    });
+    var pct = Math.round((answered / required.length) * 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-text').textContent = answered + ' / ' + required.length + ' 問';
+  }
+
+  function submitForm(){
+    var valid = true;
+    required.forEach(function(name, i){
+      var card = document.getElementById('card'+(i+1));
+      if(!document.querySelector('input[name="'+name+'"]:checked')){
+        card.classList.add('has-error');
+        valid = false;
+      } else {
+        card.classList.remove('has-error');
+      }
+    });
+
+    if(!valid){
+      document.querySelector('.card.has-error').scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+
+    window.location.href = REDIRECT_URL;
+  }
+</script>
+</body>
+</html>
